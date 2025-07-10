@@ -1,0 +1,59 @@
+HELP.md
+/target/
+/.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# IDE Specific
+#.idea/                # IntelliJ IDEA
+*.iml
+*.ipr
+*.iws
+/.idea_modules/
+/.rebel.xml
+/.run/
+
+#.vscode/              # VS Code
+.vscode/
+
+#.project              # Eclipse / STS
+.project
+.classpath
+.settings/
+.apt_generated/
+.factorypath
+.springBeans
+.sts4-cache/
+
+# Build Tools
+.gradle/
+/build/
+!/src/main/**/build/
+!/src/test/**/build/
+
+# OS Specific
+.DS_Store
+Thumbs.db
+
+# Logs and Databases
+*.log
+*.sql
+*.sqlite
+*.sqlite3
+
+# Env files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Coverage reports for tests
+/coverage/
+
+# Node.js
+/node_modules/
+/npm-debug.log*
+/yarn-debug.log*
+/yarn-error.log*
+.pnpm-store/
