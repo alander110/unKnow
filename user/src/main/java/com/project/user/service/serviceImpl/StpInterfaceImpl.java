@@ -1,4 +1,4 @@
-package com.project.user.Service.ServiceImpl;
+package com.project.user.service.serviceImpl;
 
 import cn.dev33.satoken.stp.StpInterface;
 import org.springframework.stereotype.Component;

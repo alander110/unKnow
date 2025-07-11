@@ -1,4 +1,4 @@
-package com.project.user.Exception;
+package com.project.user.exception;
 
 
 import cn.dev33.satoken.exception.NotPermissionException;
