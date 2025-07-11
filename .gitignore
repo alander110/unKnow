@@ -12,6 +12,10 @@ HELP.md
 /.idea_modules/
 /.rebel.xml
 /.run/
+/logs/
+/temp/
+.mvn
+.idea
 
 #.vscode/              # VS Code
 .vscode/
