@@ -11,10 +11,5 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @Slf4j
 public class GlobalExceptionHandler {
     // 权限拦截
-    @ExceptionHandler(NotPermissionException.class)
-    public Result<String> handlerException(Exception e) {
-        log.warn(String.valueOf(e));
-        return Result.fail("无此权限");
-    }
 }
 

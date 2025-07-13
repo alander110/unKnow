@@ -6,6 +6,7 @@ HELP.md
 
 # IDE Specific
 .idea/
+.idea
 target
 *.iml
 *.ipr
