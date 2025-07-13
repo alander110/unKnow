@@ -1,0 +1,17 @@
+server:
+    port: 8080
+spring:
+  application:
+    name: gateway
+  #Mysql
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/unknow?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&useSSL=false
+    username: root
+    password: 123456
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 2
+nacos:
+  config:
+    server-addr: 14.103.207.26:8848·

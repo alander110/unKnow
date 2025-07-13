@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
  */
 @Data
 @Builder
-@TableName("sys_loginLog")
+@TableName("sys_login_log")
 public class LoginLog implements Serializable {
 
     private static final long serialVersionUID = 1L;

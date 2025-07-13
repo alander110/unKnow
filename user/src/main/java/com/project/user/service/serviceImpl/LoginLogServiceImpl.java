@@ -13,11 +13,12 @@ import java.time.LocalDateTime;
 public class LoginLogServiceImpl extends ServiceImpl<LoginLogMapper, LoginLog> implements LoginLogService {
     @Override
     public void record(Long userId,int i) {
-        LoginLog.builder()
+        LoginLog loginLog = LoginLog.builder()
                 .userId(userId)
                 .loginIp("127.0.0.1")
                 .deviceInfo("Windows 10")
                 .result(i)
                 .build();
+        this.save(loginLog);
     }
 }
