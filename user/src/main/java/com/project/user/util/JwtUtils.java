@@ -59,4 +59,30 @@ public class JwtUtils {
                 .parseSignedClaims(jwt)
                 .getPayload();
     }
+
+    /**
+     * 从 JWT Token 中提取用户名
+     */
+    public static String extractUsername(String token) throws Exception {
+        return parseJWT(token).getSubject();
+    }
+
+    /**
+     * 校验 Refresh Token 是否有效
+     */
+    public static boolean validateRefreshToken(String token) {
+        try {
+            parseJWT(token); // 如果解析失败会抛出异常
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+
+    // 创建 Refresh Token
+    public static String createRefreshToken(String username, long ttlMillis) {
+        JwtBuilder builder = getJwtBuilder(username, ttlMillis, getUUID());
+        return builder.compact();
+    }
 }

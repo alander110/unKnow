@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * @description 用户登录历史记录审计表
@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
  */
 @Data
 @Builder
-@TableName("sys_loginLog")
+@TableName("sys_login_log")
 public class LoginLog implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -44,7 +44,7 @@ public class LoginLog implements Serializable {
      * 登录发生时间
      */
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    private LocalDateTime loginTime;
+    private Date loginTime;
 
     /**
      * 登录结果：0-失败 1-成功

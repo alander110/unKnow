@@ -62,6 +62,6 @@ public class User implements Serializable {
     /**
      * 账户最后更新时间
      */
-    @TableField(fill = FieldFill.UPDATE)
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
 }
