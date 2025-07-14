@@ -1,4 +1,4 @@
-package com.project.user.Config;
+package com.project.user.config;
 
 import com.project.user.util.JwtUtils;
 import com.project.user.mapper.UserMapper;
