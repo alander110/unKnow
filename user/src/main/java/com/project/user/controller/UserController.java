@@ -16,6 +16,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * 用户管理
+ */
 @RestController
 @RequestMapping("/user/")
 @RequiredArgsConstructor
@@ -25,6 +28,11 @@ public class UserController {
 
     private final LoginLogService loginLogService;
 
+    /**
+     * 获取用户信息
+     * @param userId 用户id
+     * @return 用户信息
+     */
     @GetMapping("info")
     public Result<UserInfoRes> getUserInfo(@RequestParam(name = "userId") Long userId){
         User userInfo =userService.getUserInfo(userId);
@@ -39,6 +47,11 @@ public class UserController {
         }
     }
 
+    /**
+     * 修改用户信息
+     * @param userUpdateReq 用户信息更新请求参数，包含需要修改的用户字段
+     * @return 是否更新成功的结果封装
+     */
     @PutMapping("update")
     public Result<String> updateUser(@RequestBody UserUpdateReq userUpdateReq){
         Boolean updateFlag = userService.updateUser(userUpdateReq);
@@ -49,6 +62,11 @@ public class UserController {
         }
     }
 
+    /**
+     * 修改密码
+     * @param changePasswordReq 修改密码请求参数，包含用户ID和旧密码和新密码
+     * @return 修改结果
+     */
     @PutMapping("changePassword")
     public Result<String> changePassword(@RequestBody ChangePasswordReq changePasswordReq){
 
@@ -62,7 +80,12 @@ public class UserController {
         }
     }
 
-
+    /**
+     * 修改用户状态
+     * @param userId 用户ID
+     * @param status 状态
+     * @return 修改结果
+     */
     @PutMapping("UpdateUserStatus/{userId}/{status}")
     public Result<String> updateUserStatus(@PathVariable("userId") Long userId, @PathVariable("status") int status){
         // 调用服务层禁用用户
@@ -84,6 +107,13 @@ public class UserController {
     }
 
 
+    /**
+     * 获取用户列表(可选择查询条件)
+     * @param pageNum 页码
+     * @param pageSize 每页数量
+     * @param selectUserReq 查询条件
+     * @return 用户列表
+     */
     @PostMapping("list")
     public Result<PageInfo<UserInfoRes>> getUserList(
             @RequestParam(name = "pageNum", defaultValue = "1") Integer pageNum,
