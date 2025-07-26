@@ -2,6 +2,7 @@ package com.project.common.Result;
 
 import lombok.Data;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 import java.io.Serializable;
 
@@ -54,6 +55,14 @@ public class Result<T> implements Serializable {
         result.setMessage(message);
         return result;
     }
+
+    public static <T> Result<T> fail(StatusCode statusCode, String message, T data) {
+        Result<T> result = new Result<>(statusCode);
+        result.setData(data);
+        result.setMessage(message);
+        return result;
+    }
+
 
     @Override
     public String toString() {

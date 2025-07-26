@@ -50,3 +50,4 @@ logging:
           web:
             util:
               matcher: debug
+    com.project.user.mapper: debug
