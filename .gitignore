@@ -1,26 +1,21 @@
+# Help file
 HELP.md
-/target/
+
+# Build directories
+*/target/
+
+# Maven wrapper
 /.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
 
 # IDE Specific
-#.idea/                # IntelliJ IDEA
+.idea/
+.mvn/
 *.iml
 *.ipr
 *.iws
 /.idea_modules/
 /.rebel.xml
 /.run/
-/logs/
-/temp/
-.mvn
-.idea
-
-#.vscode/              # VS Code
-.vscode/
-
-#.project              # Eclipse / STS
 .project
 .classpath
 .settings/
@@ -28,6 +23,7 @@ HELP.md
 .factorypath
 .springBeans
 .sts4-cache/
+.vscode/
 
 # Build Tools
 .gradle/
@@ -57,7 +53,11 @@ Thumbs.db
 
 # Node.js
 /node_modules/
-/npm-debug.log*
-/yarn-debug.log*
-/yarn-error.log*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 .pnpm-store/
+
+# Rebel XML files (JRebel)
+/common/src/main/resources/rebel.xml
+/user/src/main/resources/rebel.xml

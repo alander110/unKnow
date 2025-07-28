@@ -1,85 +1,45 @@
 package com.project.user.exception;
 
-
-import cn.dev33.satoken.exception.NotLoginException;
-import cn.dev33.satoken.exception.NotPermissionException;
-import cn.dev33.satoken.exception.NotRoleException;
 import com.project.common.Result.Result;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import com.project.common.Result.StatusCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
-
-    // 在当前类每个方法进入之前触发的操作
-    @ModelAttribute
-    public void get(HttpServletRequest request) throws IOException {
-
+    // 权限拦截
+    /**
+     * 处理通用异常
+     * @param e 异常对象
+     * @return 统一响应结果
+     */
+    @ExceptionHandler(Exception.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ResponseBody
+    public Result<String> handleGenericException(Exception e) {
+        log.error("系统异常", e);
+        return Result.fail(StatusCode.SYSTEM_ERROR, "系统内部错误: " + e.getMessage(),null);
     }
 
 
-    // 全局异常拦截（拦截项目中的所有异常）
+    /**
+     * 处理运行时异常
+     * @param e 运行时异常
+     * @return 统一响应结果
+     */
+    @ExceptionHandler(RuntimeException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
-    @ExceptionHandler
-    public Result<String> handlerException(Exception e, HttpServletRequest request, HttpServletResponse response)
-            throws Exception {
-        // 打印堆栈，以供调试
-        log.error("全局异常---------------");
-        e.printStackTrace();
-
-        // 不同异常返回不同状态码
-        String aj = null;
-        if (e instanceof NotRoleException) {        // 如果是角色异常
-            NotRoleException ee = (NotRoleException) e;
-            aj = "无此角色：" + ee.getRole();
-        } else if (e instanceof NotPermissionException) {    // 如果是权限异常
-            NotPermissionException ee = (NotPermissionException) e;
-            aj = "无此权限：" + ee.getCode();
-        } else {    // 普通异常, 输出：500 + 异常信息
-            aj = e.getMessage();
-        }
-        // 返回给前端
-        return Result.fail(aj);
-    }
-
-
-    @ResponseBody
-    @ExceptionHandler
-    public Result<String> handlerNotLoginException(NotLoginException nle, HttpServletRequest request, HttpServletResponse response)
-            throws Exception {
-        nle.printStackTrace();
-
-        // 判断场景值，定制化异常信息
-        String message = "";
-        if(nle.getType().equals(NotLoginException.NOT_TOKEN)) {
-            message = "未提供token";
-        }
-        else if(nle.getType().equals(NotLoginException.INVALID_TOKEN)) {
-            message = "token无效";
-        }
-        else if(nle.getType().equals(NotLoginException.TOKEN_TIMEOUT)) {
-            message = "token已过期";
-        }
-        else if(nle.getType().equals(NotLoginException.BE_REPLACED)) {
-            message = "token已被顶下线";
-        }
-        else if(nle.getType().equals(NotLoginException.KICK_OUT)) {
-            message = "token已被踢下线";
-        }
-        else {
-            message = "当前会话未登录";
-        }
-        // 返回给前端
-        return Result.fail(message);
+    public Result<String> handleRuntimeException(RuntimeException e) {
+        return Result.fail(StatusCode.BUSINESS_ERROR, "系统内部错误: " + e.getMessage(),null);
     }
 }
+
